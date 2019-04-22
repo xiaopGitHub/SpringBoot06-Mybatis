@@ -9,7 +9,26 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #自定义druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
-    initialSize: 5
+    # 初始化大小，最小，最大
+    initial-size: 1
+    min-idle: 3
+    max-active: 20
+    # 配置获取连接等待超时的时间
+    max-wait: 60000
+    # 打开PSCache，并且指定每个连接上PSCache的大小
+    pool-prepared-statements: true
+    # 验证链接sql
+    validation-query: select 1
+    validation-query-timeout: 60000
+    test-on-borrow: false
+    test-on-return: false
+    test-while-idle: true
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    time-between-eviction-runs-millis: 60000
+    max-pool-prepared-statement-per-connection-size: 20
+    filters: stat,wall,log4j2
+    use-global-data-source-stat: true
+    connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 
 ################整合redis配置###################
   redis:
